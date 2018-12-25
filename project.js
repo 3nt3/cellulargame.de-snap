@@ -14,16 +14,36 @@ function spawnFood() {
 
 function getFood() {
 	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", "https://api.niels-dingsbums.de/getFood", false);
+	xhttp.open("GET", "https://api.niels-dingsbums.de/spawnFood", false);
 	xhttp.send();
-	return xhttp.responseText;
+ 	var json = JSON.parse(xhttp.responseText);
+ 	var food = [];
+ 	for (var i = 0; i < json.length; i++) {
+  		food.push(Object.values(json[i]));
+ 	}
+ 	//console.log(JSON.stringify(food));
+	return JSON.stringify(food);
+}
+
+function calculateVelo(angle) {
+	angle = angle * Math.PI / 180;
+	var velo = [Math.sin(angle), Math.cos(angle)]
+
+	return new List(velo);
 }
 
 function getCells() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", "https://api.niels-dingsbums.de/getCells", false);
 	xhttp.send();
-	return xhttp.responseText;
+	var cells = [];
+	var json = JSON.parse(xhttp.responseText);
+
+	for (var i = 0; i < json.length; i++) {
+		cells.push(Object.values(json[i]));
+	}
+
+	return JSON.stringify(cells);
 }
 
 function initCell(name) {
