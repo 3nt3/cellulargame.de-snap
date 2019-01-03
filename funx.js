@@ -12,10 +12,14 @@ function setVelo(angle, speed) {
 
 /*
 Example usage:
-getDist([45, 1], [100, 43])
+getDist([0, 0], [100, 0])
+==> 100
 */
 
 function getDist(center, pos) {
+	// center: position of currentPlayer
+	// pos   : position 
+
 	var a = center[0] - pos[0];
 	var b = center[1] - pos[1];
 	return Math.sqrt(a*a + b*b)
