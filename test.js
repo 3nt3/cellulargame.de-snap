@@ -1,23 +1,10 @@
-food.forEach((item) => {
-	createClone(item, this);
+var morphs = this.parent.children.filter((morph) => {
+	return morph.name == "food"
+})[0].instances
+
+morphs.forEach((morph) => {
+	if (this.isTouching(morph)) {
+		morph.deleteClone();
+		wsRequest({type: "eat", data: {id: currentPlayer.id, mealId: foodItems[]}});
+	}	
 })
-
-function createClone(item, morph) {
-	var clone = morph.createClone(true);
-	clone.gotoXY(clone.pos);
-	
-	const values = [5, 10, 20];
-	var id;
-	values.forEach((value, index) => {
-		if (item.value == value) {
-			id = index;
-		}
-	})
-	
-	const sizes = [5, 8, 12];
-	clone.setScale(sizes[id]);
-
-	clone.doSwitchToCostume(id);
-
-	clone.show();
-}
