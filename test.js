@@ -3,8 +3,9 @@ var morphs = this.parent.children.filter((morph) => {
 })[0].instances
 
 morphs.forEach((morph) => {
+	var mealId = morph.variables.vars.id.value;
 	if (this.isTouching(morph)) {
 		morph.deleteClone();
-		wsRequest({type: "eat", data: {id: currentPlayer.id, mealId: foodItems[]}});
+		wsRequest({type: "eat", data: {id: currentPlayer.id, mealId: foodItems[mealId]}});
 	}	
 })
